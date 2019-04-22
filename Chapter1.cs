@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
-using Object = System.Object;
 using System.Diagnostics;
 
 namespace DataStruct
 {
-    public class Chapter1 
+    public class Chapter1
     {
         public void Test()
         {
@@ -17,7 +16,7 @@ namespace DataStruct
             timeMeasure.End();
 
 
-            string[] testNames = new string[] {"One ","two ","3 " };
+            string[] testNames = new string[] { "One ", "two ", "3 " };
             testNames.SetValue("newValue", 0);
 
             foreach (var item in testNames)
@@ -48,7 +47,7 @@ namespace DataStruct
 
     public class SwapHelp
     {
-        public static void Swap<T>(ref T value1,ref T value2)
+        public static void Swap<T>(ref T value1, ref T value2)
         {
             T temp;
             temp = value1;
@@ -127,14 +126,14 @@ namespace DataStruct
         {
             InnerList.RemoveAt(index);
         }
-    }   
+    }
 
     public class CArray
     {
         private int[] arr;
         private int upper;
         private int numElements;
-        
+
         public CArray(int size)
         {
             arr = new int[size];
@@ -144,7 +143,7 @@ namespace DataStruct
 
         public void Insert(int item)
         {
-            if(numElements >= upper)
+            if (numElements >= upper)
             {
                 return;
             }
@@ -196,7 +195,7 @@ namespace DataStruct
             {
                 for (int inner = 0; inner <= outer - 1; inner++)
                 {
-                    if(arr[inner] > arr[inner+1])
+                    if (arr[inner] > arr[inner + 1])
                     {
                         temp = arr[inner];
                         arr[inner] = arr[inner + 1];
@@ -212,7 +211,7 @@ namespace DataStruct
             for (int outer = 0; outer <= upper; outer++)
             {
                 min = outer;
-                for (int inner = outer +1; inner <= upper; inner++)
+                for (int inner = outer + 1; inner <= upper; inner++)
                 {
                     if (arr[inner] < arr[min])
                     {
@@ -232,13 +231,103 @@ namespace DataStruct
             {
                 temp = arr[outer];
                 inner = outer;
-                while(inner > 0 && arr[inner - 1] >= temp)
+                while (inner > 0 && arr[inner - 1] >= temp)
                 {
                     arr[inner] = arr[inner - 1];
                     inner -= 1;
                 }
                 arr[inner] = temp;
             }
+        }
+
+        public int SeqSearch(int value)
+        {
+            for (int i = 0; i <= upper; i++)
+            {
+                if (value == arr[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public static int FindMin(int[] minArray)
+        {
+            int min = minArray[0];
+            int minLength = minArray.Length;
+            for (int i = 0; i < minLength; i++)
+            {
+                if (minArray[i] < min)
+                {
+                    min = minArray[i];
+                }
+            }
+            return min;
+        }
+
+        public static int FindMax(int[] maxArray)
+        {
+            int max = maxArray[0];
+            int minLength = maxArray.Length;
+            for (int i = 0; i < minLength; i++)
+            {
+                if (maxArray[i] > max)
+                {
+                    max = maxArray[i];
+                }
+            }
+            return max;
+        }
+
+        public static void Swap(int[] array, ref int source, ref int dest)
+        {
+            int temp = array[source];
+            array[source] = array[dest];
+            array[dest] = temp;
+        }
+
+        public static int SeqSearchFast(int[] searchArray, int value)
+        {
+            for (int index = 0; index < searchArray.Length; index++)
+            {
+                if (searchArray[index] == value && index > (searchArray.Length * 0.2))
+                {
+                    int sourceIndex = index;
+                    int destIndex = index - 1;
+                    Swap(searchArray, ref sourceIndex, ref destIndex);
+                    return index;
+                }
+                else if (searchArray[index] == value)
+                {
+                    return index;
+                }
+            }
+            return -1;
+        }
+
+        public int BinarySearch(int[] searchArray, int value)
+        {
+            int upperBound, lowerBound, mid;
+            upperBound = searchArray.Length - 1;
+            lowerBound = 0;
+            while (lowerBound <= upperBound)
+            {
+                mid = (upperBound + lowerBound) / 2;
+                if (searchArray[mid] == value)
+                {
+                    return mid;
+                }
+                else if (value < searchArray[mid])
+                {
+                    upperBound = mid - 1;
+                }
+                else
+                {
+                    lowerBound = mid + 1;
+                }
+            }
+            return -1;
         }
     }
 }
