@@ -15,9 +15,11 @@ namespace DataStruct
 
 
             //Chapter1 chapter1 = new Chapter1();
-           // chapter1.Test();
+            // chapter1.Test();
 
-            CArray.Test();
+            //CArray.Test();
+            // CStack.SimpleCalculator();
+            BasicID.Test();
 
             Console.ReadKey();
 
